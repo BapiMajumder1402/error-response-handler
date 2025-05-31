@@ -1,4 +1,4 @@
-import { successResponse, StatusCode } from '../src';
+import { successResponse } from '../src';
 
 describe('successResponse', () => {
   it('should return default success response', () => {
