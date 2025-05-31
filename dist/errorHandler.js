@@ -4,11 +4,14 @@ exports.errorResponse = exports.AppError = void 0;
 const statusCodes_1 = require("./statusCodes");
 const resolveStatusCode = (input) => {
     if (typeof input === 'number') {
-        const found = Object.values(statusCodes_1.StatusCode).find(sc => sc.code === input);
+        const found = Object.values(statusCodes_1.StatusCode).find((sc) => 'code' in sc && sc.code === input);
         //@ts-ignore
         return found || { code: input, text: 'Custom Status' };
     }
-    return typeof input === 'string' ? statusCodes_1.StatusCode[input] : input;
+    if (typeof input === 'string') {
+        return statusCodes_1.StatusCode[input];
+    }
+    return input;
 };
 class AppError extends Error {
     constructor(message, status = statusCodes_1.StatusCode.INTERNAL_SERVER_ERROR, isOperational = true) {
