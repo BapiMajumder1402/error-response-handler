@@ -1,0 +1,41 @@
+{
+  "name": "error-response-handler",
+  "version": "1.0.0",
+  "description": "Comprehensive error handling and response formatting for Node.js applications",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublish": "npm run build",
+    "test": "jest --coverage",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "precommit": "npm run lint && npm run test"
+  },
+  "keywords": [
+    "error-handling",
+    "response-handler",
+    "async-middleware",
+    "express",
+    "typescript",
+    "http-status-codes"
+  ],
+  "author": "Bapi Majumder",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.15.29",
+    "@typescript-eslint/eslint-plugin": "^8.33.0",
+    "@typescript-eslint/parser": "^8.33.0",
+    "eslint": "^9.28.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.3.4",
+    "typescript": "^5.8.3"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
