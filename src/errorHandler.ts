@@ -3,11 +3,16 @@ import { ErrorResponse, StatusInput } from "./types";
 
 const resolveStatusCode = (input: StatusInput): StatusCodeValue => {
   if (typeof input === 'number') {
-    const found = Object.values(StatusCode).find(sc => sc.code === input);
+    const found = Object.values(StatusCode).find((sc): sc is StatusCodeValue => 
+      'code' in sc && sc.code === input
+    );
     //@ts-ignore
     return found || { code: input, text: 'Custom Status' };
   }
-  return typeof input === 'string' ? StatusCode[input] : input;
+  if (typeof input === 'string') {
+    return StatusCode[input as keyof typeof StatusCode];
+  }
+  return input;
 };
 
 export class AppError extends Error {
