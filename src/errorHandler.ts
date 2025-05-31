@@ -1,17 +1,27 @@
-import { StatusCode, StatusCodeValue } from "./statusCodes";
+import { StatusCode, StatusCodeValue, StatusCodeKey } from "./statusCodes";
 import { ErrorResponse, StatusInput } from "./types";
 
 const resolveStatusCode = (input: StatusInput): StatusCodeValue => {
+  // Handle number inputs
   if (typeof input === 'number') {
     const found = Object.values(StatusCode).find((sc): sc is StatusCodeValue => 
-      'code' in sc && sc.code === input
+      sc.code === input
     );
-    //@ts-ignore
-    return found || { code: input, text: 'Custom Status' };
+    return found || {
+      code: 500,
+      text: `Internal Server Error`
+    };
   }
+
+  // Handle string inputs (StatusCodeKey)
   if (typeof input === 'string') {
-    return StatusCode[input as keyof typeof StatusCode];
+    if (!(input in StatusCode)) {
+      throw new Error(`Invalid status code key: ${input}`);
+    }
+    return StatusCode[input as StatusCodeKey];
   }
+
+  // Handle direct StatusCodeValue inputs
   return input;
 };
 
@@ -19,6 +29,7 @@ export class AppError extends Error {
   public readonly statusCode: number;
   public readonly statusText: string;
   public readonly isOperational: boolean;
+  public readonly timestamp: string;
 
   constructor(
     message: string,
@@ -30,7 +41,11 @@ export class AppError extends Error {
     this.statusCode = code;
     this.statusText = text;
     this.isOperational = isOperational;
-    Error.captureStackTrace(this, this.constructor);
+    this.timestamp = new Date().toISOString();
+    
+    if (typeof Error.captureStackTrace === 'function') {
+      Error.captureStackTrace(this, this.constructor);
+    }
   }
 }
 
@@ -39,9 +54,10 @@ export const errorResponse = (options: {
   error?: unknown;
   statusCode?: StatusInput;
   includeStack?: boolean;
+  isDev?: boolean;
 }): ErrorResponse => {
   const { code, text } = resolveStatusCode(options.statusCode || StatusCode.INTERNAL_SERVER_ERROR);
-  const isDev = process.env.NODE_ENV === 'development';
+  const isDev = options.isDev ?? false;
   
   return {
     success: false,

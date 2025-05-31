@@ -1,3 +1,4 @@
+
 export const StatusCode = {
   // 2xx Success
   SUCCESS: { code: 200, text: "Success" },
