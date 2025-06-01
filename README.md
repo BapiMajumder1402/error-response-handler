@@ -5,11 +5,11 @@
 [![CI/CD](https://img.shields.io/github/actions/workflow/status/bapimajumder/error-response-handler/node.js.yml?style=flat-square)](https://github.com/bapimajumder/error-response-handler/actions)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-blue.svg?style=flat-square)](https://www.typescriptlang.org/)
 
-A comprehensive error handling and response formatting solution for Node.js applications with full TypeScript support.
+A comprehensive error handling and response formatting solution for Express.js applications with full TypeScript support.
 
 **Author**: Bapi Majumder  
 **Email**: bapim1402@gmail.com  
-**GitHub**: [bapimajumder](https://github.com/BapiMajumder1402)
+**GitHub**: [bapimajumder](https://github.com/BapiMajumder1402/error-response-handler)
 
 ## ✨ Features
 
@@ -138,16 +138,6 @@ Code	Constant	Text
 500	INTERNAL_SERVER_ERROR	Internal Server Error
 Full list available in statusCodes.ts
 
-🤝 Contributing
-Fork the project
-
-Create your feature branch (git checkout -b feature/AmazingFeature)
-
-Commit your changes (git commit -m 'Add some AmazingFeature')
-
-Push to the branch (git push origin feature/AmazingFeature)
-
-Open a Pull Request
 
 📜 License
 Distributed under the MIT License. See LICENSE for more information.
@@ -156,5 +146,3 @@ Distributed under the MIT License. See LICENSE for more information.
 Bapi Majumder  - bapim1402@gmail.com
 
 Project Link: https://github.com/BapiMajumder1402/error-response-handler
-
-
